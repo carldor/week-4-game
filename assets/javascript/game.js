@@ -61,7 +61,7 @@ $(document).ready(function() {
     });
 
         $(document).on ("click", "#attack", function(){
-    	if (Game.mainPlayerIsSelected && Game.defenderIsSelected){
+    	if (Game.mainPlayerIsSelected && Game.defenderIsSelected && !Game.mainPlayer.isDefeated && !Game.mainPlayer.isDefeated){
 
     		var message = ''
 
@@ -92,19 +92,22 @@ $(document).ready(function() {
     			$("#message").html(message);
     		}
     		else if (defeated(Game.mainPlayer[0])){
+    			Game.mainPlayer.HP = 0;
+    			Game.mainPlayer.isDefeated = true;
     			message = "<p>You've been defeated...GAME OVER!!!</p>"
     			$("#message").html(message);
     			showRestartBtn();
     		}
 
-    		// if(!Game.defender[0].isDefeated){
-    		// 	clearContainer("my-character");
-    		// 	loadPlayers(Game.mainPlayer,"my-character");
 
-    		// 	clearContainer("defender");
-    		// 	loadPlayers(Game.defender,"defender");
-    			
-    		// }
+    		if(!Game.mainPlayer.isDefeated){
+    			clearContainer("my-character");
+    			loadPlayers(Game.mainPlayer,"my-character");
+    		}
+
+    		clearContainer("defender");
+    		loadPlayers(Game.defender,"defender");
+
     		$("#message").html(message);
 
     	}

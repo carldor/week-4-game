@@ -7,10 +7,13 @@ h1,h3,p{
 	font-family: arcadeFont;
 	color: white;
 }
-
-.container{
+body{
+	/*background-color: black;*/
 	background: url("../images/background.jpg");
 	background-repeat: no-repeat;
+}
+
+.container{
     height: 100%;
     width: 100%;
     background-size: 100%;
