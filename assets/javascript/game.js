@@ -74,17 +74,7 @@ $(document).ready(function() {
     		Game.mainPlayer[0].attackPower += Game.mainPlayer[0].initialAttackPower;
     		Game.mainPlayer[0].HP -= Game.defender[0].attackPower;
 
-    		if (defeated(Game.mainPlayer[0])){
-    			Game.mainPlayer[0].HP = 0;
-    			Game.mainPlayer[0].isDefeated = true;
-    			message = "<p>You've been defeated...GAME OVER!!!</p>"
-    			$("#message").html(message);
-    			clearContainer("my-character");
-    			loadPlayers(Game.mainPlayer,"my-character");
-    			showRestartBtn();
-    		}
-
-    		else if (defeated(Game.defender[0])){
+    		if (defeated(Game.defender[0])){
 
     			clearContainer("defender");
 
@@ -101,7 +91,15 @@ $(document).ready(function() {
 
     			$("#message").html(message);
     		}
-
+			else if (defeated(Game.mainPlayer[0])){
+    			Game.mainPlayer[0].HP = 0;
+    			Game.mainPlayer[0].isDefeated = true;
+    			message = "<p>You've been defeated...GAME OVER!!!</p>"
+    			$("#message").html(message);
+    			clearContainer("my-character");
+    			loadPlayers(Game.mainPlayer,"my-character");
+    			showRestartBtn();
+    		}
 
     		if(!Game.mainPlayer.isDefeated){
     			clearContainer("my-character");
