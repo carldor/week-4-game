@@ -6,15 +6,16 @@ $(document).ready(function() {
     	mainPlayerIsSelected: false,
     	defenderIsSelected: false,
     	playGame: function() {
-        console.log("Playing Game!");
+    		hideRestartBtn();
+    		createPlayers(playerImgList);
+    		loadPlayers(playerList,"characters");
       }
     }
 
     var playerImgList = ["han-solo","yoda","boba-fett","darth-vader"];
     var playerList = [];
 
-    createPlayers(playerImgList);
-    loadPlayers(playerList,"characters");
+    Game.playGame();
 
     $(document).on ("click", ".character", function(){
     	
@@ -41,6 +42,8 @@ $(document).ready(function() {
 
     $(document).on ("click", ".enemies", function(){
     	if (Game.mainPlayerIsSelected && !Game.defenderIsSelected){
+
+    		clearContainer("message");
 
     		for(var i = 0; i<Game.enemies.length; i++){
     			if (Game.enemies[i].name === $(this).attr('value')){
@@ -73,35 +76,61 @@ $(document).ready(function() {
 
     		if (defeated(Game.defender[0])){
 
+    			clearContainer("defender");
+
     			if(Game.enemies.length > 0){
-    				clearContainer("defender");
     				message = "<p>You have defeated " + Game.defender[0].name + ", you can choose to fight another enemy.</p>";
-    				Game.defender.splice(0,1);
-    				Game.defenderIsSelected = false;
     			}
     			else{
     				message = "<p>You Won!!!! GAME OVER!!!</p>"
+    				showRestartBtn();
     			}
+
+    			Game.defender.splice(0,1);
+    			Game.defenderIsSelected = false;
+
     			$("#message").html(message);
     		}
     		else if (defeated(Game.mainPlayer[0])){
     			message = "<p>You've been defeated...GAME OVER!!!</p>"
     			$("#message").html(message);
+    			showRestartBtn();
     		}
 
-    		if(!Game.defender[0].isDefeated){
-    			clearContainer("my-character");
-    			loadPlayers(Game.mainPlayer,"my-character");
+    		// if(!Game.defender[0].isDefeated){
+    		// 	clearContainer("my-character");
+    		// 	loadPlayers(Game.mainPlayer,"my-character");
 
-    			clearContainer("defender");
-    			loadPlayers(Game.defender,"defender");
-    			$("#message").html(message);
-    		}
+    		// 	clearContainer("defender");
+    		// 	loadPlayers(Game.defender,"defender");
+    			
+    		// }
+    		$("#message").html(message);
 
     	}
     	else if(!Game.defenderIsSelected){
     		$("#message").html("<p>No enemy here.</p>");
     	}
+    });
+
+    $(document).on("click", "#restart", function(){
+
+    	Game.mainPlayer = [];
+    	Game.defender = [];
+    	Game.enemies = [];
+    	Game.mainPlayerIsSelected = false;
+    	Game.defenderIsSelected = false;
+
+    	playerList = [];
+
+    	clearContainer("characters");
+    	clearContainer("my-character");
+    	clearContainer("enemies");
+    	clearContainer("defender");
+    	clearContainer("message");
+
+    	Game.playGame();
+
     });
 
     function createPlayers (playerImgList){
@@ -202,5 +231,13 @@ $(document).ready(function() {
 
     	return result;
     }
+
+    function showRestartBtn() {
+    	$("#restart").show();
+	}
+
+	function hideRestartBtn(){
+		$("#restart").hide();
+	}
 
 });

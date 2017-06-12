@@ -47,7 +47,7 @@ h1,h3,p{
 	color: white;
 }
 
-.character-content{
+.character-content, #my-character, #enemies, #defender{
 	margin-left: 45px;
 }
 
@@ -61,6 +61,11 @@ h1,h3,p{
 
 .defender .character-text{
 	color: white;
+}
+
+#message{
+	margin-left: 30px;
+	margin-top: 20px;
 }
 
 /*.name{
