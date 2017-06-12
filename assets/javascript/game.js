@@ -68,11 +68,9 @@ $(document).ready(function() {
     		console.log(Game);
 
     		message = "<p>You attacked " + Game.defender[0].name + " for " + Game.mainPlayer[0].attackPower + " damage.</p>";
-    		message = message + '<p>' + Game.defender[0].name + " attacked you back for " + Game.defender[0].attackPower + " damage.</p>"
 
     		Game.defender[0].HP -= Game.mainPlayer[0].attackPower;
     		Game.mainPlayer[0].attackPower += Game.mainPlayer[0].initialAttackPower;
-    		Game.mainPlayer[0].HP -= Game.defender[0].attackPower;
 
     		if (defeated(Game.defender[0])){
 
@@ -91,7 +89,13 @@ $(document).ready(function() {
 
     			$("#message").html(message);
     		}
-			else if (defeated(Game.mainPlayer[0])){
+			
+    		if(!Game.defender[0].isDefeated){
+    			Game.mainPlayer[0].HP -= Game.defender[0].attackPower;
+    			message = message + '<p>' + Game.defender[0].name + " attacked you back for " + Game.defender[0].attackPower + " damage.</p>"
+    		}
+
+			if (defeated(Game.mainPlayer[0])){
     			Game.mainPlayer[0].HP = 0;
     			Game.mainPlayer[0].isDefeated = true;
     			message = "<p>You've been defeated...GAME OVER!!!</p>"
