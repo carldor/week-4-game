@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'arcadeFont';
+  src: url('PressStart2P.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+} 
+
+h1,h3,p{
+	font-family: arcadeFont;
+	color: white;
+}
+
+.container{
+	background: url("../images/background.jpg");
+	background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    background-size: 100%;
+    padding-left: 30px;
+}
+
+.pic{ 
+    width: 150px; 
+    height: 120px;
+}
+
+#characters{
+    width: 840px; 
+}
+
+.character{
+ 	background: white;
+ 	width: 210px; 
+    height: 180px;
+    float: left;
+    border-style: solid;
+    border-width: 2px;
+    border-color: green;
+}
+
+.enemies {
+	background: red;
+	border-color: black;
+}
+
+.defender {
+	background: black;
+	border-color: purple;
+	color: white;
+}
+
+.character-content{
+	margin-left: 45px;
+}
+
+.character-text{
+	color: black;
+	text-align: center;
+	margin-top: 5px;
+	margin-left: 35px;
+	width: 160px;
+}
+
+.defender .character-text{
+	color: white;
+}
+
+/*.name{
+	text-align: center;
+}*/
